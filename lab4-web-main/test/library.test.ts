@@ -57,7 +57,6 @@ describe('Library', function () {
       year: '',
       borrowed: false,
     }
-    let jksdnv: string;
     const book2: Book = {
       id: 2,
       title: 'Test Book 2',
