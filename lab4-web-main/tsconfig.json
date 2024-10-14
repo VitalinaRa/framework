@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "removeComments": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noUnusedParameters": false,
+  },
+  "include": ["C:/3 курс/lab4-web-main"],
+  "exclude": ["C:/3 курс/lab4-web-main/dist"]
+}

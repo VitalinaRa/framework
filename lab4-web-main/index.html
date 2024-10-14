@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="libs/bootstrap.css" />
+    <title>Система управління бібліотекою</title>
+    <style>
+      .error-message {
+        color: red;
+        font-size: 0.875em;
+      }
+    </style>
+  </head>
+  <body data-bs-theme="dark">
+    <div class="block__wrapper">
+      <div class="block__inner">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="heading d-flex justify-content-center mt-4">
+                <h1><b>Система Управління Бібліотекою</b></h1>
+              </div>
+              <div class="form bg-secondary mb-4">
+                <form
+                  id="bookForm"
+                  class="form form__wrapper d-flex flex-column shadow-lg gap-2 p-4 needs-validation"
+                  novalidate
+                >
+                  <div class="form-group">
+                    <div class="py-2"><h2>Додати книгу</h2></div>
+                    <input
+                      id="title"
+                      class="form-control"
+                      placeholder="Назва книги"
+                      type="text"
+                      required
+                    />
+                    <div class="invalid-feedback">Назва книги обов'язкова.</div>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      id="author"
+                      class="form-control"
+                      placeholder="Автор"
+                      type="text"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Автор книги обов'язковий.
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      id="year"
+                      class="form-control"
+                      placeholder="Рік видання"
+                      type="text"
+                      pattern="^(19|20)\d{2}$"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Введіть коректний рік (наприклад, 1999 або 2023).
+                    </div>
+                  </div>
+                  <button
+                    id="addBookBtn"
+                    class="btn btn-success bg-success w-25 flex-grow-0"
+                    type="submit"
+                  >
+                    Додати книгу
+                  </button>
+                </form>
+              </div>
+
+              <div class="form bg-secondary mb-4">
+                <form
+                  id="userForm"
+                  class="form form__wrapper d-flex flex-column shadow-lg gap-2 p-4 needs-validation"
+                  novalidate
+                >
+                  <div class="form-group">
+                    <div class="py-2"><h2>Додати користувача</h2></div>
+                    <input
+                      class="form-control"
+                      id="name"
+                      placeholder="Ім'я"
+                      type="text"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Ім'я користувача обов'язкове.
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      id="email"
+                      class="form-control"
+                      placeholder="Email"
+                      type="email"
+                      required
+                    />
+                    <div class="invalid-feedback">Введіть коректний email.</div>
+                  </div>
+                  <button
+                    type="submit"
+                    id="addUserBtn"
+                    class="btn btn-success bg-success w-25 flex-grow-0"
+                  >
+                    Додати користувача
+                  </button>
+                </form>
+              </div>
+
+              <div class="form bg-secondary mb-4">
+                <div class="p-4">
+                  <h2>Список книг</h2>
+                  <ul class="list-group" id="bookList"></ul>
+                </div>
+              </div>
+              <div class="form bg-secondary mb-4">
+                <div class="p-4">
+                  <h2>Список користувачів</h2>
+                  <ul class="list-group" id="userList"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header d-flex justify-content-between">
+            <h5 class="modal-title">Сповіщення</h5>
+            <button
+              type="button"
+              class="btn btn-info"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modalMessage"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-bs-dismiss="modal">
+              Закрити
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="borrowReturnModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header d-flex justify-content-between">
+            <h5 class="modal-title">Позичити або повернути книгу</h5>
+            <button
+              type="button"
+              class="btn btn-info"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="borrowReturnForm">
+              <div class="form-group">
+                <label for="userId">ID користувача</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="userId"
+                  placeholder="Введіть ID користувача"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="bookId">ID книги</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="bookId"
+                  placeholder="Введіть ID книги"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              type="button"
+              class="btn btn-info"
+              id="borrowBookBtn"
+            >
+              Позичити книгу
+            </button>
+            <button
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              type="button"
+              class="btn btn-warning"
+              id="returnBookBtn"
+            >
+              Повернути книгу
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./dist/bundle.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const bookForm = document.getElementById("bookForm")
+        const userForm = document.getElementById("userForm")
+
+        bookForm.addEventListener("submit", (event) => {
+          if (!bookForm.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          bookForm.classList.add("was-validated")
+        })
+
+        userForm.addEventListener("submit", (event) => {
+          if (!userForm.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          userForm.classList.add("was-validated")
+        })
+      })
+    </script>
+  </body>
+</html>

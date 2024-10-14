@@ -1,0 +1,49 @@
+{
+  "name": "lab-app",
+  "version": "1.0.0",
+  "description": "",
+  "type": "commonjs",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve --open",
+    "lint": "npx eslint src",
+    "lint:fix": "eslint src/ --fix",
+    "test": "mocha --require ts-node/register --esm --recursive test/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Computer-Science-Department-ChNU/javascript-frameworks.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "@eslint/js": "^9.12.0",
+    "@types/chai": "^4.3.19",
+    "@types/jest": "^29.5.13",
+    "@types/mocha": "^10.0.8",
+    "@types/node": "^22.5.5",
+    "@typescript-eslint/eslint-plugin": "^8.5.0",
+    "@typescript-eslint/parser": "^8.5.0",
+    "babel-eslint": "^10.1.0",
+    "chai": "^5.1.1",
+    "eslint": "^9.12.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-vue": "^9.29.0",
+    "globals": "^15.11.0",
+    "mocha": "^10.7.3",
+    "prettier": "^3.3.3",
+    "ts-loader": "^9.5.1",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.8.1",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "@types/bootstrap": "^5.2.10",
+    "bootstrap": "^5.3.3"
+  }
+}
