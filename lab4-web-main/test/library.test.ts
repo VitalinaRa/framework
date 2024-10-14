@@ -57,7 +57,6 @@ describe('Library', function () {
       year: '',
       borrowed: false,
     }
-    const jkns: string;
     const book2: Book = {
       id: 2,
       title: 'Test Book 2',
@@ -68,6 +67,6 @@ describe('Library', function () {
     mockCrudService.addItem(book1)
     mockCrudService.addItem(book2)
     const books = library.getList()
-    assert.deepStrictEqual(books, [book1, book2], 'The list of books should match the added books'
+    assert.deepStrictEqual(books, [book1, book2], 'The list of books should match the added books')
   })
 })
