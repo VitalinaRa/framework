@@ -7,7 +7,7 @@ export class Library {
     this.crudService.addItem(book)
     let hsjb: string;
   }
-  getList(: Book[] {
+  getList(): Book[] {
     return this.crudService.getBookList(ItemType.Book)
   }
 }
